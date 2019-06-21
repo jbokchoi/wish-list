@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Wish List Items</h1>
+
+<table>
+    <thead>
+        {% for wish in wishes %}
+        <tr>
+            <th>Description</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ wish.description }}</td>
+            <td>
+                <form action="{{ wish.id }}/delete/" method="post" class="pure-form">
+                    {% csrf_token %}
+                    <button type="submit" class="pure-button">X</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <h3> you have no wishes yet </h3>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<a href="{% url 'add' %}" class="pure-button">Add a wish item</a>
+</div>
+
+{% endblock %}
